@@ -1,0 +1,31 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+    static-path-pattern: /resources/**
+      
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/school?serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
+    
+  jpa:
+    open-in-view: true  #영속성을 VIEW까지 가져감 -> 트랜잭션이 종료된 후에도 영속 객체(프록시)가 유지되어 데이터 사용 가능(EAGER이 아닌 LAZY전략) 기본으로 true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #entity생성할 때 변수명 그대로 넣어주는의미 카멜표기법 스네이크로 변경아님
+      use-new-id-generator-mappings: false
+    show-sql: true  #sql쿼리
+    properties:
+      hibernate.format_sql: true  #쿼리 정렬
