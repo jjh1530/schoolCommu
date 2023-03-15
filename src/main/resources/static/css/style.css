@@ -101,6 +101,7 @@ input[type=button], input[type=submit], input[type=reset]  {
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+  width:80%;
 }
 
 input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
@@ -191,7 +192,6 @@ input[type=text]:placeholder {
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
 .fadeIn {
-  opacity:0;
   -webkit-animation:fadeIn ease-in 1;
   -moz-animation:fadeIn ease-in 1;
   animation:fadeIn ease-in 1;

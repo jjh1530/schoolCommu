@@ -29,3 +29,13 @@ spring:
     show-sql: true  #sql쿼리
     properties:
       hibernate.format_sql: true  #쿼리 정렬
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 139316584732-rldq1ss6da4tii17hj366765vnf8hs38.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+            - email
+            - profile
