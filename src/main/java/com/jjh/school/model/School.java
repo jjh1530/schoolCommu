@@ -17,7 +17,7 @@ public class School {
 
 	@Id
 	@Column(name = "school_id")
-	private int id;
+	private String id;
 	
 	private String schoolName;
 	
@@ -33,7 +33,7 @@ public class School {
 	
 	private String address;
 	
-	private Long latitude;
+	private String latitude;
 	
-	private Long longitude;
+	private String longitude;
 }

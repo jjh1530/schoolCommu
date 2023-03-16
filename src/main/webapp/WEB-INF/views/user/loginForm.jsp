@@ -19,12 +19,12 @@
     <!-- Login Form -->
     <form action="/login" method="post"> <!-- SecurityConfigration으로 -->
       <input type="text" id="username" class="fadeIn " name="username" placeholder="login">
-      <input type="text" id="password" class="fadeIn " name="password" placeholder="password">
+      <input type="password" id="password" class="fadeIn " name="password" placeholder="password">
       <input type="submit" class="fadeIn " value="Log In">
     </form>
     <input type="button" class="fadeIn" onClick="location.href='/oauth2/authorization/google'" value="구글로그인">
-    <input type="button" class="fadeIn " value="페이스북로그인">
-    <input type="button" class="fadeIn " value="네이버로그인">
+    <input type="button" class="fadeIn " onClick="location.href='/oauth2/authorization/facebook'" value="페이스북로그인">
+    <input type="button" class="fadeIn " onClick="location.href='/oauth2/authorization/naver'" value="네이버로그인">
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
