@@ -69,7 +69,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 			.oauth(provider)
 			.password("password")
 			.name(name)
-			.role(Role.USER)
+			.role(Role.ROLE_USER)
 			.build();
 			System.out.println(userEntity+"@@@@@@@@@@@@@");
 			userRepository.save(userEntity);

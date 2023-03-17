@@ -15,11 +15,13 @@ public class SchoolService {
 	@Autowired
 	SchoolRepository schoolRepository;
 	
-	public List<School> selectSchool(String schoolName) {
+	public List<School> selectSchoolList(String schoolName) {
 		List<School> schools = schoolRepository.findBySchoolNameContaining(schoolName);
 		return schools;
-		 
 	}
 	
+	public School selectSchool(String schoolName) {
+		return schoolRepository.findBySchoolName(schoolName);
+	}
 
 }

@@ -6,46 +6,32 @@
 	<div class="container">
 		<div class="card shadow mb-4">
 			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-				<h6 class="m-0 font-weight-bold">회원가입</h6>
+				<h6 class="m-0 font-weight-bold">학교정보 등록</h6>
 			</div>
 			<div class="panel-body">
-				<form id="joinForm" name="joinForm" method="post" >
-					<div class="bg-light rounded h-100 p-4">
-						<div class="col-sm-12">
-							<input type="text" class="form-control" id="username" name="username" placeholder="아이디를 입력하세요">
-						</div>
-					</div>
-					<div class="bg-light rounded h-100 p-4">
-						<div class="col-sm-12">
-							<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력하세요">
-						</div>
-					</div>
-					<div class="bg-light rounded h-100 p-4">
-						<div class="col-sm-12">
-							<input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력하세요">
-						</div>
-					</div>
+				<form id="updateForm" name="updateForm" method="post" >
+					<input type="hidden" id="id" name="id"value="${user.id}">
 					<div class="bg-light rounded h-100 p-4">
 						<div class="col-sm-11" style="display: inline-block;">
-							<input type="text" class="form-control" id="elementarySchool" name="elementarySchool" placeholder="초등학교" readonly="true">
+							<input type="text" class="form-control" id="elementarySchool" name="elementarySchool" value="${user.elementarySchool }" placeholder="초등학교" readonly="true">
 						</div>
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#elementarySchoolModal">검색</button>
 					</div>
 					<div class="bg-light rounded h-100 p-4">
 						<div class="col-sm-11" style="display: inline-block;">
-							<input type="text" class="form-control" id="middleSchool" name="middleSchool" placeholder="중학교" readonly="true">
+							<input type="text" class="form-control" id="middleSchool" name="middleSchool" value="${user.middleSchool }" placeholder="중학교" readonly="true">
 						</div>
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#middleSchoolModal">검색</button>
 					</div>
 					<div class="bg-light rounded h-100 p-4">
 						<div class="col-sm-11" style="display: inline-block;">
-							<input type="text" class="form-control" id="highSchool" name="highSchool" placeholder="고등학교" readonly="true">
+							<input type="text" class="form-control" id="highSchool" name="highSchool" value="${user.highSchool }" placeholder="고등학교" readonly="true">
 						</div>
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#highSchoolModal">검색</button>
 					</div>
 			</div>
 
-			<input type="button" class="btn btn-dark" onclick="register();"  value="회원가입">
+			<input type="button" class="btn btn-dark" onclick="schoolUpdate();"  value="학교등록">
 			</form>
 		</div>
 	</div>
@@ -143,6 +129,5 @@
 	</div>
 </body>
 <script>
-
 </script>
 </html>

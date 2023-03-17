@@ -20,7 +20,7 @@ public class SchoolController {
 	@PostMapping("/schoolSelect")
 	@ResponseBody
 	public List<School> scholSelect(String schoolName) {
-		List<School> list = schoolService.selectSchool(schoolName);
+		List<School> list = schoolService.selectSchoolList(schoolName);
 		System.out.println(list);
 		if (list!= null) {
 			return list;

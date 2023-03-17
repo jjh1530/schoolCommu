@@ -23,8 +23,22 @@ public class UserService {
 		String rawPassword = user.getPassword();
 		String encPassword = encoder.encode(rawPassword);
 		user.setPassword(encPassword);
-		user.setRole(Role.USER);
+		user.setRole(Role.ROLE_USER);
 		userRepository.save(user);
+	}
+	
+	@Transactional
+	public void schoolUpdate(User user) {
+		User updateUser = userRepository.findById(user.getId()).orElse(null);
+		if (updateUser == null) {
+            throw new RuntimeException("User not found");
+        }
+
+        updateUser.setElementarySchool(user.getElementarySchool());
+        updateUser.setMiddleSchool(user.getMiddleSchool());
+        updateUser.setHighSchool(user.getHighSchool());
+
+        userRepository.save(updateUser);
 	}
 
 }

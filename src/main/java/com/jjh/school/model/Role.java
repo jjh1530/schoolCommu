@@ -1,5 +1,5 @@
 package com.jjh.school.model;
 
 public enum Role {
-	ADMIN, USER;
+	ROLE_ADMIN, ROLE_USER;
 }
