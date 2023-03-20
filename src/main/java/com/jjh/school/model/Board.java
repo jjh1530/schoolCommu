@@ -32,10 +32,18 @@ public class Board {
 	
 	private String schoolName;
 	
+	@Column(nullable = false)
+    private String userName;
+	
 	@ManyToOne(fetch = FetchType.EAGER)	//board가 여러개 user는 한명 EAGER : 자동으로 user 정보 가져옴 LAZY : 자동으로 가져오지 않음
-	@JoinColumn(name="userId")  //실제로 생서되는 컬럼 이름
+	@JoinColumn(name="user_id")  //실제로 생서되는 컬럼 이름
 	private User user;
 	
 	@CreationTimestamp
 	private Timestamp indate;
+	
+	public void setUser(User user) {
+		this.user = user;
+		this.userName = user.getName();
+	}
 }

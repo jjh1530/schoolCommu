@@ -39,7 +39,7 @@ public class User {
 	
 	private String highSchool;
 	
-	private String oauth; // kakao
+	private String oauth; 
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;
@@ -59,7 +59,4 @@ public class User {
 		this.role = role;
 	}
 
-	
-	
-	
 }

@@ -35,7 +35,7 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="schoolName">초등학교 :</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="schoolName" name="schoolName" readonly="readonly" value="${user.elementarySchool}" >
+								<input type="text" class="form-control" id="schoolName" name="schoolName" readonly="readonly" value="${user.middleSchool}" >
 							</div>
 						</div>
 						<div style="text-align: center;">

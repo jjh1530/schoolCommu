@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.jjh.school.config.auth.PrincipalDetails;
 import com.jjh.school.model.Board;
+import com.jjh.school.model.User;
 import com.jjh.school.service.BoardService;
 
 @Controller
@@ -18,16 +19,33 @@ public class BoardController {
 	BoardService boardService;
 	
 	@GetMapping("/elementaryBoardWriteForm")
-	public String boardWriteForm(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+	public String elementaryBoardWriteForm(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
 		if (principalDetails != null) {
 			model.addAttribute("user", principalDetails.getUser());
 		}
 		return "/board/elementaryBoardWriteForm";
 	}
 	
+	@GetMapping("/middleBoardWriteForm")
+	public String middleBoardWriteForm(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+		if (principalDetails != null) {
+			model.addAttribute("user", principalDetails.getUser());
+		}
+		return "/board/middleBoardWriteForm";
+	}
+	
+	@GetMapping("/highBoardWriteForm")
+	public String highBoardWriteForm(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+		if (principalDetails != null) {
+			model.addAttribute("user", principalDetails.getUser());
+		}
+		return "/board/highBoardWriteForm";
+	}
+	
 	@PostMapping("/boardWrite")
-	public String boardWrite(Board vo) {
-		boardService.boardWrite(vo);
+	public String boardWrite(Board vo,@AuthenticationPrincipal PrincipalDetails principalDetails) {
+		boardService.boardWrite(vo,principalDetails.getUser());
+		
 		return "redirect:/";
 	}
 }
