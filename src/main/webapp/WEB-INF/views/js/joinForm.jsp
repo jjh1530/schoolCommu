@@ -67,7 +67,7 @@ function schoolUpdate() {
 		      var schoolName = obj.schoolName;
 		      var address = obj.address;
 		      bList += "<tr>";
-		      bList += "<td><button class='elemetarySchoolNameBtn' data-schoolName='" + schoolName + "'>" + schoolName + "</button></td>";
+		      bList += "<td><button class='elemetarySchoolNameBtn btn btn-sm btn-dark' data-schoolName='" + schoolName + "'>" + schoolName + "</button></td>";
 		      bList += "<td>" + address + "</td>";
 		      bList += "</tr>";
 		    });
@@ -115,7 +115,7 @@ function schoolUpdate() {
 		      var schoolName = obj.schoolName;
 		      var address = obj.address;
 		      bList += "<tr>";
-		      bList += "<td><button class='middleSchoolNameBtn' data-schoolName='" + schoolName + "'>" + schoolName + "</button></td>";
+		      bList += "<td><button class='middleSchoolNameBtn btn btn-sm btn-dark' data-schoolName='" + schoolName + "'>" + schoolName + "</button></td>";
 		      bList += "<td>" + address + "</td>";
 		      bList += "</tr>";
 		    });
@@ -163,7 +163,7 @@ function schoolUpdate() {
 		      var schoolName = obj.schoolName;
 		      var address = obj.address;
 		      bList += "<tr>";
-		      bList += "<td><button class='highSchoolNameBtn' data-schoolName='" + schoolName + "'>" + schoolName + "</button></td>";
+		      bList += "<td><button class='highSchoolNameBtn btn btn-sm btn-dark' data-schoolName='" + schoolName + "'>" + schoolName + "</button></td>";
 		      bList += "<td>" + address + "</td>";
 		      bList += "</tr>";
 		    });
