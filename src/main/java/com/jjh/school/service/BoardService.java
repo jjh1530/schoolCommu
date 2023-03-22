@@ -1,6 +1,7 @@
 package com.jjh.school.service;
 
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,4 +36,9 @@ public class BoardService {
 	    PageRequest pageRequest = PageRequest.of(page, 10);
 	    return boardRepository.findBySchoolNameAndTitleContainingOrSchoolNameAndContentContaining(schoolName, keyword, schoolName, keyword, pageRequest);
 	}
+	public Page<Board> schoolBoard(String keyword, List<String> schoolNames, int page) {
+	    PageRequest pageRequest = PageRequest.of(page, 10);
+	    return boardRepository.findByTitleContainingOrContentContainingAndSchoolNameIn(keyword, keyword, schoolNames, pageRequest);
+	}
+	
 }

@@ -3,7 +3,7 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<c:set var="user" value="${SPRING_SECURITY_CONTEXT.authentication.principal }" />
+<c:set var="user" value="${SPRING_SECURITY_CONTEXT.authentication.principal.user }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,13 +29,13 @@
 					<li class="nav-item"><a class="nav-link" href="/loginForm">로그인</a></li>
 				</c:if>
 				<c:if test="${user != null}">
-					<c:if test="${user.user.elementarySchool != null }">
+					<c:if test="${user.elementarySchool != null && user.elementarySchool !=''}">
 						<li class="nav-item"><a class="nav-link" href="/elementaryBoard">초등학교</a></li>
 					</c:if>
-					<c:if test="${user.user.middleSchool != null }">
+					<c:if test="${user.middleSchool != null && user.middleSchool !=''}">
 						<li class="nav-item"><a class="nav-link" href="/middleBoard">중학교</a></li>
 					</c:if>
-					<c:if test="${user.user.highSchool != null }">
+					<c:if test="${user.highSchool != null && user.highSchool !=''}">
 						<li class="nav-item"><a class="nav-link" href="/highBoard">고등학교</a></li>
 					</c:if>
 					<li class="nav-item"><a class="nav-link" href="/schoolUpdateFormLogin">학교정보</a></li>

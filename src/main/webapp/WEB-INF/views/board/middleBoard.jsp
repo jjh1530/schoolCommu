@@ -36,20 +36,26 @@
 					<button type="button" class="btn btn-dark" onClick="location.href='/highBoard'">${user.highSchool }</button>
 				</c:if>
 			</div>
-
-			<c:if test="${user!=null }">
-				<button type="button" class="btn btn-sm btn-success" style="margin-left: 50px;" onClick="location='/middleBoardWriteForm'">글작성</button>
-			</c:if>
+			
 		</div>
+		<hr>
 		<div class="container" id="middleForm">
 			<div class="card shadow mb-4">
-				<form action="/middleBoard" method="get">
-					<input type="text" name="keyword"> 
-					<button type="submit">검색</button>
-				</form>
 				<!-- Card Header - Dropdown -->
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold">중학교 정보</h6>
+					<div class="col-sm-4 d-flex align-items-center">
+						<h6 class="m-0 font-weight-bold">중학교 정보</h6>
+					</div>
+					<div class="col-sm-8">
+						<form class="d-flex" action="/middleBoard" method="get">
+							<input type="text" name="keyword" class="form-control">
+							<button type="submit" class="btn btn-dark" style="width: 70px; margin-left: 10px;">검색</button>
+							<c:if test="${user!=null }">
+								<button type="button" class="btn btn-sm btn-success" style="width: 100px; margin-left: 10px;" onClick="location='/elementaryBoardWriteForm'">글작성</button>
+							</c:if>
+							
+						</form>
+					</div>
 				</div>
 				<div class="card-body">
 					<form action="userUpdate.do" method="post" enctype="multipart/form-data">
@@ -183,18 +189,20 @@
 				</tbody>
 			</table>
 			<%-- 페이지 링크 --%>
-			<ul class="pagination">
-				<c:forEach begin="${startPage}" end="${endPage}" step="1" var="i">
-					<c:choose>
-						<c:when test="${i == currentPage}">
-							<li class="active"><a href="#">${i}</a></li>
-						</c:when>
-						<c:otherwise>
-							<li><a href="/middleBoard?keyword=${keyword}&page=${i-1}">${i}</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-			</ul>
+			<div id="paginationBox" class="text-center">
+				<ul class="pagination" style="justify-content: center;">
+					<c:forEach begin="${startPage}" end="${endPage}" step="1" var="i">
+						<c:choose>
+							<c:when test="${i == currentPage}">
+								<li class="page-link"><a href="#">${i}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-link"><a href="/middleBoard?keyword=${keyword}&page=${i-1}">${i}</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</ul>
+			</div>
 		</div>
 
 

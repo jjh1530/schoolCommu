@@ -13,5 +13,11 @@ public interface BoardRepository extends JpaRepository<Board, Integer>{
 	public Page<Board> findBySchoolName(String schoolName,Pageable pageable);
 	
 	// 제목 또는 내용에 키워드를 포함하는 게시글 검색
-	Page<Board> findBySchoolNameAndTitleContainingOrSchoolNameAndContentContaining(String schoolName, String title, String schoolName2, String content, Pageable pageable);
+	Page<Board> findBySchoolNameAndTitleContainingOrSchoolNameAndContentContaining
+	(String schoolName, String title, String schoolName2, String content, Pageable pageable);
+	
+	//여러학교 포함
+	Page<Board> findByTitleContainingOrContentContainingAndSchoolNameIn
+	(String title, String content, List<String> schoolNames, Pageable pageable);
+	
 }
