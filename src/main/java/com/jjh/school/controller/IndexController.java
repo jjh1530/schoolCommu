@@ -33,38 +33,35 @@ public class IndexController {
 
 	@Autowired
 	private BoardRepository boardRepository;
-	
+
 	@GetMapping("/")
 	public String index(@AuthenticationPrincipal PrincipalDetails principalDetails,
-			@RequestParam(defaultValue = "") String keyword, 
-			@RequestParam(defaultValue = "0") int page, Model model) {
+	        @RequestParam(defaultValue = "") String keyword,
+	        @RequestParam(defaultValue = "0") int page, Model model) {
 
-		String elementarySchool = null;
-		String middleSchool = null;
-		String highSchool = null;
-		if (principalDetails != null) {
-			elementarySchool =principalDetails.getUser().getElementarySchool();
-			middleSchool =principalDetails.getUser().getMiddleSchool();
-			highSchool =principalDetails.getUser().getHighSchool();
-			List<String> schoolName = Arrays.asList(elementarySchool, middleSchool, highSchool);
-			Page<Board> elementaryList = boardService.searchBoard(keyword, elementarySchool,page);
-			System.out.println(elementaryList.getContent());
-			System.out.println("로그인" + elementarySchool);
-			model.addAttribute("elementaryList", elementaryList.getContent());
-		}else {
-			
-			
-			elementarySchool ="해남동초등학교";
-			Page<Board> elementaryList = boardService.searchBoard(keyword, elementarySchool,page);
-			System.out.println("비로그인" + elementarySchool);
-			model.addAttribute("elementaryList", elementaryList.getContent());
-		}
-		
-		return "/index";
-
+		List<String> schoolNames = new ArrayList<String>();
+	    if (principalDetails != null) {
+	        String elementarySchool = principalDetails.getUser().getElementarySchool();
+	        String middleSchool = principalDetails.getUser().getMiddleSchool();
+	        String highSchool = principalDetails.getUser().getHighSchool();
+	        if (elementarySchool != null) schoolNames.add(elementarySchool);
+	        if (middleSchool != null) schoolNames.add(middleSchool);
+	        if (highSchool != null) schoolNames.add(highSchool);
+	        
+	        for(String x : schoolNames) {
+	        	System.out.println("학교이름 :" +x);
+	        }
+	        
+	        Page<Board> elementaryList = boardService.schoolBoard(keyword, schoolNames, page);
+	        System.out.println(elementaryList.getContent());
+	        model.addAttribute("elementaryList", elementaryList.getContent());
+	    } else {
+	        model.addAttribute("elementaryList", Collections.emptyList());
+	        return "/index";
+	    }
+	    
+	    return "/index";
 	}
-	
-
 
 	@GetMapping("/admin/test")
 	@ResponseBody

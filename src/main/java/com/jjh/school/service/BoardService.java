@@ -1,6 +1,5 @@
 package com.jjh.school.service;
 
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,28 +16,33 @@ import com.jjh.school.repository.BoardRepository;
 
 @Service
 public class BoardService {
-	
+
 	@Autowired
 	BoardRepository boardRepository;
-	
+
 	@Transactional
-	public void boardWrite(Board board,User user) {
+	public void boardWrite(Board board, User user) {
 		board.setUser(user);
 		boardRepository.save(board);
 	}
-	
-	
-	public Page<Board> boardList(String schoolName,Pageable pageable) {
-		return boardRepository.findBySchoolName(schoolName,pageable);
+
+	public Page<Board> boardList(String schoolName, Pageable pageable) {
+		return boardRepository.findBySchoolName(schoolName, pageable);
 	}
-	
+
 	public Page<Board> searchBoard(String keyword, String schoolName, int page) {
-	    PageRequest pageRequest = PageRequest.of(page, 10);
-	    return boardRepository.findBySchoolNameAndTitleContainingOrSchoolNameAndContentContaining(schoolName, keyword, schoolName, keyword, pageRequest);
+		PageRequest pageRequest = PageRequest.of(page, 10);
+		return boardRepository.findBySchoolNameAndTitleContainingOrSchoolNameAndContentContaining(schoolName, keyword,
+				schoolName, keyword, pageRequest);
 	}
+
+	
 	public Page<Board> schoolBoard(String keyword, List<String> schoolNames, int page) {
-	    PageRequest pageRequest = PageRequest.of(page, 10);
-	    return boardRepository.findByTitleContainingOrContentContainingAndSchoolNameIn(keyword, keyword, schoolNames, pageRequest);
+		PageRequest pageRequest = PageRequest.of(page, 10);
+		return boardRepository.findBySchoolNameInAndTitleContainingOrSchoolNameInAndContentContaining(schoolNames, keyword, schoolNames, keyword, pageRequest);
+		
 	}
 	
+	
+
 }
