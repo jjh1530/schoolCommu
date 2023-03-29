@@ -37,7 +37,7 @@ public class IndexController {
 	@GetMapping("/")
 	public String index(@AuthenticationPrincipal PrincipalDetails principalDetails,
 	        @RequestParam(defaultValue = "") String keyword,
-	        @RequestParam(defaultValue = "0") int page, Model model) {
+	        @RequestParam(defaultValue = "1") int page, Model model) {
 
 		List<String> schoolNames = new ArrayList<String>();
 	    if (principalDetails != null) {
@@ -53,8 +53,12 @@ public class IndexController {
 	        }
 	        
 	        Page<Board> elementaryList = boardService.schoolBoard(keyword, schoolNames, page);
-	        System.out.println(elementaryList.getContent());
+	        //System.out.println(elementaryList.getContent());
+	        
 	        model.addAttribute("elementaryList", elementaryList.getContent());
+	        model.addAttribute("total", elementaryList.getTotalElements());
+	        model.addAttribute("totalPage", elementaryList.getTotalPages());
+	        
 	    } else {
 	        model.addAttribute("elementaryList", Collections.emptyList());
 	        return "/index";

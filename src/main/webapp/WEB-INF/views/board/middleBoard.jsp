@@ -179,7 +179,7 @@
 										<pre style="overflow: scroll; height: 150px;">${list.content}</pre>
 									</div>
 								</div>
-								<button type="button" class="btn btn-primary" onclick="">상세보기</button>
+								<button type="button" class="btn btn-primary" onclick="location.href='boardDetail?id=${list.id}'">상세보기</button>
 							</div>
 						</div>
 						<br>

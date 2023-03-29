@@ -1,27 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="pages" value="${totalPages}" />
-<c:set var="currentPage" value="${currentPage +1 }" />
-<c:set var="startPage" value="${currentPage - 5}" />
-<c:set var="endPage" value="${currentPage + 5}" />
+<%-- 현재 페이지 --%>
+<c:set var="currentPage" value="${param.page - 0 - 1}" />
+<%-- 한 페이지에 보여줄 게시글 개수 --%>
+<c:set var="perPage" value="10" />
+<%-- 전체 항목 수 --%>
+<c:set var="total" value="${(total != null) ? total : 0}" />
+<%-- 전체 페이지 수 --%>
+<c:set var="totalPage" value="${(total > 0) ? Math.ceil(total / perPage) : 1}" />
+<%-- 표시할 첫 번째 페이지와 마지막 페이지 계산 --%>
+<c:set var="startPage" value="${((currentPage / 5) * 5) + 1}" />
+<c:set var="endPage" value="${(startPage + 4 < totalPage) ? startPage + 4 : totalPage}" />
 
-<c:set var="user" value="${SPRING_SECURITY_CONTEXT.authentication.principal.user }" />
-<c:if test="${startPage < 1}">
-	<c:set var="startPage" value="1" />
-	<c:set var="endPage" value="10" />
-</c:if>
 
-<c:if test="${endPage > pages}">
-	<c:set var="endPage" value="${pages}" />
-	<c:set var="startPage" value="${pages - 9}" />
-</c:if>
-
-<c:if test="${startPage < 1}">
-	<c:set var="startPage" value="1" />
-</c:if>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <body>
+
+
+
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<div class="w3-content" style="max-width: 1400px">
 
@@ -34,19 +31,28 @@
 				<input type="text" name="keyword" class="form-control">
 				<button type="submit" class="btn btn-dark" style="width: 70px; margin-left: 10px;">검색</button>
 			</form>
+
 			<div id="paginationBox" class="text-center">
-				<ul class="pagination" style="justify-content: center;">
-					<c:forEach begin="${startPage}" end="${endPage}" step="1" var="i">
-						<c:choose>
-							<c:when test="${i == currentPage}">
-								<li class="page-link"><a href="#">${i}</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="page-link"><a href="/?keyword=${keyword}&page=${i-1}">${i}</a></li>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</ul>
+				<div class="pagination justify-content-center">
+					<ul class="pagination">
+						<c:if test="${currentPage > 0}">
+							<li class="page-item"><a class="page-link" href="?page=${(currentPage-4 >= 1) ? currentPage-4 : 1}">이전</a></li>
+						</c:if>
+						<c:forEach begin="${startPage}" end="${endPage}" step="1" var="pageNum">
+							<c:choose>
+								<c:when test="${pageNum == currentPage + 1}">
+									<li class="page-item active"><a class="page-link" href="?page=${pageNum}">${pageNum}</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link" href="?page=${pageNum}">${pageNum}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+							<c:if test="${currentPage < totalPage - 1}">
+    <li class="page-item"><a class="page-link" href="?page=${(currentPage + 5 > totalPage - 1) ? totalPage - 1 : currentPage + 5}">다음</a></li>
+</c:if>
+					</ul>
+				</div>
 			</div>
 			<div class="w3-col l8 s12" style="overflow-y: scroll; height: 1000px;">
 				<!-- Blog entry -->

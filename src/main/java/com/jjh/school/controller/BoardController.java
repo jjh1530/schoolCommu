@@ -1,5 +1,7 @@
 package com.jjh.school.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -47,5 +49,11 @@ public class BoardController {
 		boardService.boardWrite(vo,principalDetails.getUser());
 		
 		return "redirect:/";
+	}
+	
+	@GetMapping("/boardDetail")
+	public String boardDetail(int id, Model model) {
+		model.addAttribute("vo", boardService.boardDetail(id));
+		return "/board/boardDetail";
 	}
 }

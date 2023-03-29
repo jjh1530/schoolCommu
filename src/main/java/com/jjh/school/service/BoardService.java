@@ -1,6 +1,7 @@
 package com.jjh.school.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,13 +36,14 @@ public class BoardService {
 				schoolName, keyword, pageRequest);
 	}
 
-	
 	public Page<Board> schoolBoard(String keyword, List<String> schoolNames, int page) {
-		PageRequest pageRequest = PageRequest.of(page, 10);
-		return boardRepository.findBySchoolNameInAndTitleContainingOrSchoolNameInAndContentContaining(schoolNames, keyword, schoolNames, keyword, pageRequest);
-		
+	    PageRequest pageRequest = PageRequest.of(page - 1, 10);
+	    return boardRepository.findBySchoolNameInAndTitleContainingOrSchoolNameInAndContentContaining(schoolNames, keyword, schoolNames, keyword, pageRequest);
 	}
 	
-	
+	public Board boardDetail(int id) {
+		Optional<Board> vo = boardRepository.findById(id);
+		return vo.get();
+	}
 
 }
