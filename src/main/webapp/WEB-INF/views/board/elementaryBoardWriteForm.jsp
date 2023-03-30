@@ -29,7 +29,7 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="userId">작성자 :</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="userId" name="userId" readonly="readonly" value="${user.name}" >
+								<input type="text" class="form-control" id="userId" name="userId" readonly="readonly" value="${user.id} ${user.name} ${user.oauth}" >
 							</div>
 						</div>
 						<div class="form-group">

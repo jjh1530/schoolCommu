@@ -26,45 +26,38 @@ import com.jjh.school.service.SchoolService;
 public class IndexController {
 
 	@Autowired
-	private SchoolService schoolService;
-
-	@Autowired
 	private BoardService boardService;
-
-	@Autowired
-	private BoardRepository boardRepository;
 
 	@GetMapping("/")
 	public String index(@AuthenticationPrincipal PrincipalDetails principalDetails,
-	        @RequestParam(defaultValue = "") String keyword,
-	        @RequestParam(defaultValue = "1") int page, Model model) {
+			@RequestParam(defaultValue = "") String keyword, @RequestParam(defaultValue = "0") int page, Model model) {
 
 		List<String> schoolNames = new ArrayList<String>();
-	    if (principalDetails != null) {
-	        String elementarySchool = principalDetails.getUser().getElementarySchool();
-	        String middleSchool = principalDetails.getUser().getMiddleSchool();
-	        String highSchool = principalDetails.getUser().getHighSchool();
-	        if (elementarySchool != null) schoolNames.add(elementarySchool);
-	        if (middleSchool != null) schoolNames.add(middleSchool);
-	        if (highSchool != null) schoolNames.add(highSchool);
-	        
-	        for(String x : schoolNames) {
-	        	System.out.println("학교이름 :" +x);
-	        }
-	        
-	        Page<Board> elementaryList = boardService.schoolBoard(keyword, schoolNames, page);
-	        //System.out.println(elementaryList.getContent());
-	        
-	        model.addAttribute("elementaryList", elementaryList.getContent());
-	        model.addAttribute("total", elementaryList.getTotalElements());
-	        model.addAttribute("totalPage", elementaryList.getTotalPages());
-	        
-	    } else {
-	        model.addAttribute("elementaryList", Collections.emptyList());
-	        return "/index";
-	    }
-	    
-	    return "/index";
+		if (principalDetails != null) {
+			String elementarySchool = principalDetails.getUser().getElementarySchool();
+			String middleSchool = principalDetails.getUser().getMiddleSchool();
+			String highSchool = principalDetails.getUser().getHighSchool();
+			if (elementarySchool != null)
+				schoolNames.add(elementarySchool);
+			if (middleSchool != null)
+				schoolNames.add(middleSchool);
+			if (highSchool != null)
+				schoolNames.add(highSchool);
+
+			Page<Board> elementaryList = boardService.schoolBoard(keyword, schoolNames, page);
+			// System.out.println(elementaryList.getContent());
+
+			model.addAttribute("elementaryList", elementaryList.getContent());
+			model.addAttribute("keyword", keyword);		
+			model.addAttribute("currentPage", page);
+			model.addAttribute("totalPages", elementaryList.getTotalPages());
+
+		} else {
+			model.addAttribute("elementaryList", Collections.emptyList());
+			return "/index";
+		}
+
+		return "/index";
 	}
 
 	@GetMapping("/admin/test")

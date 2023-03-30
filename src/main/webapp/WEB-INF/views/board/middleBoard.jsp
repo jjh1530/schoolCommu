@@ -157,37 +157,38 @@
 				</div>
 
 			</div>
-			<table class="table card-table">
-				<tbody class="table-border-bottom-0">
-					<c:forEach var="list" items="${middleList}" varStatus="loop">
+			<!-- Blog entry -->
+			<c:forEach var="list" items="${middleList}" varStatus="loop">
+				<div class="w3-card-4 w3-margin w3-white">
+					<div class="w3-container">
+						<h3>
+							<b>${list.title} </b>
+						</h3>
+						<h5>
+							Title description, <span class="w3-opacity">${list.indate }</span>
+						</h5>
+					</div>
 
-						<form id="likeForm" name="likeForm" class="form-horizontal" method="post"></form>
-						<div class="row" style="border: 2px outset rgba(0, 0, 0);">
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<div class="well-left">
-									<div class="single-well">
-										<img src="resources/image/rest2.jpg" alt="img" style="width: 50%" />
-									</div>
-								</div>
+					<div class="w3-container">
+						<p>${list.content }</p>
+						<div class="w3-row">
+							<div class="w3-col m8 s12">
+								<p>
+									<button class="w3-button w3-padding-large w3-white w3-border" onclick="location.href='boardDetail?id=${list.id}'">
+										<b>READ MORE »</b>
+									</button>
+								</p>
 							</div>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<div class="well-middle">
-									<div class="single-well">
-
-										<h4 class="sec-head">제목 : ${list.title}</h4>
-										<li><i class="bi bi-check"></i>등록 일자 : ${list.indate}<br /></li> <br>
-										<pre style="overflow: scroll; height: 150px;">${list.content}</pre>
-									</div>
-								</div>
-								<button type="button" class="btn btn-primary" onclick="location.href='boardDetail?id=${list.id}'">상세보기</button>
+							<div class="w3-col m4 w3-hide-small">
+								<p>
+									<span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-tag">0</span></span>
+								</p>
 							</div>
 						</div>
-						<br>
-
-					</c:forEach>
-
-				</tbody>
-			</table>
+					</div>
+				</div>
+			</c:forEach>
+			<hr>
 			<%-- 페이지 링크 --%>
 			<div id="paginationBox" class="text-center">
 				<ul class="pagination" style="justify-content: center;">

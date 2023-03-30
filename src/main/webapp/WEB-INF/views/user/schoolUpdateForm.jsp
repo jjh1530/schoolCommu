@@ -45,6 +45,7 @@
 						</div>
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#highSchoolModal">검색</button>
 					</div>
+					</form>
 			</div>
 
 			<input type="button" class="btn btn-dark" onclick="schoolUpdate();" value="학교등록">

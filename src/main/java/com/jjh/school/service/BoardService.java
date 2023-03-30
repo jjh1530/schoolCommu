@@ -37,7 +37,7 @@ public class BoardService {
 	}
 
 	public Page<Board> schoolBoard(String keyword, List<String> schoolNames, int page) {
-	    PageRequest pageRequest = PageRequest.of(page - 1, 10);
+	    PageRequest pageRequest = PageRequest.of(page, 10);
 	    return boardRepository.findBySchoolNameInAndTitleContainingOrSchoolNameInAndContentContaining(schoolNames, keyword, schoolNames, keyword, pageRequest);
 	}
 	
