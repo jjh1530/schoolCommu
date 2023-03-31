@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jjh.school.model.Board;
+import com.jjh.school.model.BoardReply;
 import com.jjh.school.model.User;
+import com.jjh.school.repository.BoardReplyRepository;
 import com.jjh.school.repository.BoardRepository;
 
 @Service
@@ -19,6 +21,9 @@ public class BoardService {
 
 	@Autowired
 	BoardRepository boardRepository;
+	
+	@Autowired
+	BoardReplyRepository boardReplyRepository;
 
 	@Transactional
 	public void boardWrite(Board board, User user) {
@@ -45,5 +50,19 @@ public class BoardService {
 		Optional<Board> vo = boardRepository.findById(id);
 		return vo.get();
 	}
+	
+	public List<BoardReply> replyList(int id) {
+		return boardReplyRepository.findByboardId(id);
+	}
+	
+	@Transactional
+	public void replyWrite(BoardReply vo, int boardId,User user) {
+		
+		Board board = boardRepository.findById(boardId).get();
+		vo.setUser(user);
+		vo.setBoard(board);
+		boardReplyRepository.save(vo);
+	}
+	
 
 }

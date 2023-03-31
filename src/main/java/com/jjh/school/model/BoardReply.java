@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +31,10 @@ public class BoardReply {
 	
 	@Column(nullable = false, length = 2000)
 	private String content;
+	
+	@ManyToOne
+	@JoinColumn(name ="boardId")  //댓글의 boardId FK
+	private Board board;
 	
 	@ManyToOne
 	@JoinColumn(name="userId")

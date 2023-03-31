@@ -116,33 +116,34 @@
 
 				<!-- END GRID -->
 			</div>
-		</c:if>
 
 
-		<!-- END w3-content -->
+
+			<!-- END w3-content -->
 	</div>
 
 	<!-- END BLOG ENTRIES -->
 	<div id="paginationBox" class="text-center">
-				<ul class="pagination" style="justify-content: center;">
-					<c:if test="${currentPage > 1}">
-						<li class="page-link"><a href="/?keyword=${keyword}&page=${currentPage - 2}"> Previous </a></li>
-					</c:if>
-					<c:forEach begin="${startPage}" end="${endPage}" step="1" var="i">
-						<c:choose>
-							<c:when test="${i == currentPage}">
-								<li class="page-link active"><a href="#">${i}</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="page-link"><a href="/?keyword=${keyword}&page=${i-1}">${i}</a></li>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					<c:if test="${currentPage < pages}">
-						<li class="page-link"><a href="/?keyword=${keyword}&page=${currentPage}"> Next </a></li>
-					</c:if>
-				</ul>
-			</div>
+		<ul class="pagination" style="justify-content: center;">
+			<c:if test="${currentPage > 1}">
+				<li class="page-link"><a href="/?keyword=${keyword}&page=${currentPage - 2}"> Previous </a></li>
+			</c:if>
+			<c:forEach begin="${startPage}" end="${endPage}" step="1" var="i">
+				<c:choose>
+					<c:when test="${i == currentPage}">
+						<li class="page-link active"><a href="#">${i}</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-link"><a href="/?keyword=${keyword}&page=${i-1}">${i}</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${currentPage < pages}">
+				<li class="page-link"><a href="/?keyword=${keyword}&page=${currentPage}"> Next </a></li>
+			</c:if>
+		</ul>
+	</div>
+	</c:if>
 	</div>
 
 	<div style="background-color: black; color: white">

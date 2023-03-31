@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<c:set var="user" value="${SPRING_SECURITY_CONTEXT.authentication.principal.user }" />
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<div class="container">
-
 
 		<div class="container" id="elementaryForm">
 			<div class="card shadow mb-4">
@@ -90,8 +89,48 @@
 							</div>
 						</div>
 						<input type="button" value="뒤로가기" onclick="history.back();" />
-						
+
 					</form>
+
+					<div class="panel-body">
+						<div class="panel panel-default">
+							<div class="bg-light rounded h-100 p-4">
+								<!--로그인 한 경우  -->
+								<c:if test="${user != null }">
+									<form id="replyForm" name="replyForm" class="form-horizontal" method="post">
+										<div class="form-group">
+											<div class="col-sm-10">
+												<textarea class="form-control" id="content" name="content" placeholder="댓글을 입력하세요" rows="5"></textarea>
+											</div>
+											<input type="hidden" name="boardId" id="boardId" value=${vo.id }>
+										</div>
+										<div style="text-align: center;">
+											<input type="button" value="댓글등록" class='btn btn-primary' onclick="replyInsert()" />
+										</div>
+									</form>
+								</c:if>
+								<c:if test="${user == null }">
+									<h4>댓글은 로그인 후 이용하실 수 있습니다.</h4>
+								</c:if>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="card">
+						<div class="card-header">댓글 리스트</div>
+						<ul id="reply-box" class="list-group">
+							<li id="reply-${reply.id }" class="list-group-item d-flex justify-content-between">
+								<div>${reply.content }</div>
+								<div class="d-flex ">
+									<div class="font-italic">${reply.user.username }&nbsp;</div>
+									<c:if test="${reply.user.username eq principal.user.username}">
+										<button onClick="index.replyDelete(${board.id}, ${reply.id })" class="badge">삭제</button>
+									</c:if>
+								</div>
+							</li>
+						</ul>
+					</div>
 
 
 				</div>
@@ -106,5 +145,34 @@
 
 	</div>
 </body>
+<script>
+	function replyInsert() {
+		var content = $("#content").val();
+		var boardId = $("#boardId").val();
+		if (content == "") {
+			alert("댓글을 입력해주세요.");
+			$("#content").focus();
+			return false;
+		}
+		/*
+		$.ajax({
+			url : "/replyWrite2",
+			type : "post",
+			data : "content=" + content + "&boardId=" + boardId,
+			success : function(result) {
+				if (result == "ok") {
+					location = "/boardDetail";
+				}
+			},
+			error : function() {
+				alert("error");
+			}
+		});
+		*/
+	
+		document.replyForm.action = "/replyWrite";
+		document.replyForm.submit();
+	}
+</script>
 
 </html>
