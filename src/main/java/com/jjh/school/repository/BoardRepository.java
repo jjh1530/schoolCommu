@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.jjh.school.model.Board;
 
-public interface BoardRepository extends JpaRepository<Board, Integer> {
+public interface BoardRepository extends JpaRepository<Board, Long> {
 
 	public Page<Board> findBySchoolName(String schoolName, Pageable pageable);
 

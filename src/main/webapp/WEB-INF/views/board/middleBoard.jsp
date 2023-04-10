@@ -51,7 +51,7 @@
 							<input type="text" name="keyword" class="form-control">
 							<button type="submit" class="btn btn-dark" style="width: 70px; margin-left: 10px;">검색</button>
 							<c:if test="${user!=null }">
-								<button type="button" class="btn btn-sm btn-success" style="width: 100px; margin-left: 10px;" onClick="location='/elementaryBoardWriteForm'">글작성</button>
+								<button type="button" class="btn btn-sm btn-success" style="width: 100px; margin-left: 10px;" onClick="location='/middleBoardWriteForm'">글작성</button>
 							</c:if>
 							
 						</form>

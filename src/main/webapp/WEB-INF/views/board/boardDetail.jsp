@@ -32,10 +32,7 @@
 									</div>
 								</div>
 							</div>
-
-
 						</div>
-
 						<div class="row">
 							<div class="col-xl-6 col-md-6 mb-4">
 								<div class="card border-left-primary shadow h-100 py-2">
@@ -52,7 +49,6 @@
 									</div>
 								</div>
 							</div>
-
 							<!-- Earnings (Monthly) Card Example -->
 							<div class="col-xl-6 col-md-6 mb-4">
 								<div class="card border-left-success shadow h-100 py-2">
@@ -69,7 +65,6 @@
 									</div>
 								</div>
 							</div>
-
 						</div>
 						<div class="row">
 							<div class="col-xl-12 col-md-6 mb-4">
@@ -89,20 +84,20 @@
 							</div>
 						</div>
 						<input type="button" value="뒤로가기" onclick="history.back();" />
-
 					</form>
-
 					<div class="panel-body">
 						<div class="panel panel-default">
 							<div class="bg-light rounded h-100 p-4">
 								<!--로그인 한 경우  -->
 								<c:if test="${user != null }">
 									<form id="replyForm" name="replyForm" class="form-horizontal" method="post">
+									<input type="text" name="boardIdx" id="boardIdx" value="${vo.idx}">
+									<input type="text" name="writer" id="writer" value="${vo.userName}">
+									
 										<div class="form-group">
 											<div class="col-sm-10">
 												<textarea class="form-control" id="content" name="content" placeholder="댓글을 입력하세요" rows="5"></textarea>
 											</div>
-											<input type="hidden" name="boardId" id="boardId" value=${vo.id }>
 										</div>
 										<div style="text-align: center;">
 											<input type="button" value="댓글등록" class='btn btn-primary' onclick="replyInsert()" />
@@ -115,60 +110,35 @@
 							</div>
 						</div>
 					</div>
-
-
 					<div class="card">
 						<div class="card-header">댓글 리스트</div>
 						<ul id="reply-box" class="list-group">
-							<li id="reply-${reply.id }" class="list-group-item d-flex justify-content-between">
+						<c:forEach var="reply" items="${reply}">
+							<li id="reply-${reply.rno }" class="list-group-item d-flex justify-content-between">
 								<div>${reply.content }</div>
 								<div class="d-flex ">
-									<div class="font-italic">${reply.user.username }&nbsp;</div>
-									<c:if test="${reply.user.username eq principal.user.username}">
-										<button onClick="index.replyDelete(${board.id}, ${reply.id })" class="badge">삭제</button>
+									<div class="font-italic">${reply.writer }&nbsp;</div>
+									<c:if test="${reply.writer eq principal.user.username}">
+										<button onClick="index.replyDelete(${board.idx}, ${reply.rno })" class="badge">삭제</button>
 									</c:if>
 								</div>
 							</li>
+							</c:forEach>
 						</ul>
 					</div>
-
-
 				</div>
-
 			</div>
-
 		</div>
-
-
-
-
-
 	</div>
 </body>
 <script>
 	function replyInsert() {
 		var content = $("#content").val();
-		var boardId = $("#boardId").val();
 		if (content == "") {
 			alert("댓글을 입력해주세요.");
 			$("#content").focus();
 			return false;
 		}
-		/*
-		$.ajax({
-			url : "/replyWrite2",
-			type : "post",
-			data : "content=" + content + "&boardId=" + boardId,
-			success : function(result) {
-				if (result == "ok") {
-					location = "/boardDetail";
-				}
-			},
-			error : function() {
-				alert("error");
-			}
-		});
-		*/
 	
 		document.replyForm.action = "/replyWrite";
 		document.replyForm.submit();

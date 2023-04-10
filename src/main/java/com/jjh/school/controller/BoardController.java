@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jjh.school.config.auth.PrincipalDetails;
 import com.jjh.school.model.Board;
@@ -58,23 +59,24 @@ public class BoardController {
 	}
 	
 	@GetMapping("/boardDetail")
-	public String boardDetail(int id, Model model) {
-		model.addAttribute("vo", boardService.boardDetail(id));
-		List<BoardReply> test = boardService.replyList(id);
-		System.out.println(test);
-		
+	public String boardDetail(Long idx, Model model) {
+		model.addAttribute("vo", boardService.boardDetail(idx));
+		List<BoardReply> reply = boardService.replyList(idx);
+		System.out.println(reply);
+		model.addAttribute("reply", reply);
+				
 		return "/board/boardDetail";
 	}
 	
-	@SuppressWarnings("unused")
 	@PostMapping("/replyWrite")
-	public String replyWrite(BoardReply vo, @AuthenticationPrincipal PrincipalDetails principalDetails, int boardId) {
-	    Integer bId = boardId;
-	    if (bId == null) {
-			System.out.println("@@@@@@@@@@@@@@@@@@@@");
-		}else {
-	    boardService.replyWrite(vo, bId, principalDetails.getUser());
-		}
+	public String replyWrite(BoardReply vo, RedirectAttributes re) {
+	    if (vo.getBoardIdx() == null) {
+	        // handle null boardIdx value here
+	    } else {
+	        boardService.replyWrite(vo);
+	        System.out.println(vo + "@@@@@@@@@@@@@@@@@");
+	        re.addAttribute("idx", vo.getBoardIdx());
+	    }
 	    return "redirect:/boardDetail";
 	}
 

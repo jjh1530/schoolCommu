@@ -46,22 +46,24 @@ public class BoardService {
 	    return boardRepository.findBySchoolNameInAndTitleContainingOrSchoolNameInAndContentContaining(schoolNames, keyword, schoolNames, keyword, pageRequest);
 	}
 	
-	public Board boardDetail(int id) {
+	public Board boardDetail(Long id) {
 		Optional<Board> vo = boardRepository.findById(id);
 		return vo.get();
 	}
 	
-	public List<BoardReply> replyList(int id) {
-		return boardReplyRepository.findByboardId(id);
+	public List<BoardReply> replyList(Long id) {
+		return boardReplyRepository.findByboardIdx(id);
 	}
 	
-	@Transactional
-	public void replyWrite(BoardReply vo, int boardId,User user) {
+	public void replyWrite(BoardReply vo) {
+		if (vo.getRno() == null) {
+			System.out.println(vo+"!!!!!!!!!!!!!!!!!!!!!#############");
+			boardReplyRepository.save(vo);
+		}else {
+			System.out.println(vo+"!!!!!!!!!!!!!!!!!!!!!#############@@@@@@@@@@@@@@");
+			boardReplyRepository.save(vo);
+		}
 		
-		Board board = boardRepository.findById(boardId).get();
-		vo.setUser(user);
-		vo.setBoard(board);
-		boardReplyRepository.save(vo);
 	}
 	
 

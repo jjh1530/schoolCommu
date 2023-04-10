@@ -76,7 +76,7 @@
 								<div class="w3-row">
 									<div class="w3-col m8 s12">
 										<p>
-											<button class="w3-button w3-padding-large w3-white w3-border" onclick="location.href='boardDetail?id=${list.id}'">
+											<button class="w3-button w3-padding-large w3-white w3-border" onclick="location.href='boardDetail?idx=${list.idx}'">
 												<b>READ MORE »</b>
 											</button>
 										</p>
