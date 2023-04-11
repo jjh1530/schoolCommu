@@ -57,13 +57,15 @@ public class BoardService {
 	
 	public void replyWrite(BoardReply vo) {
 		if (vo.getRno() == null) {
-			System.out.println(vo+"!!!!!!!!!!!!!!!!!!!!!#############");
 			boardReplyRepository.save(vo);
 		}else {
-			System.out.println(vo+"!!!!!!!!!!!!!!!!!!!!!#############@@@@@@@@@@@@@@");
 			boardReplyRepository.save(vo);
 		}
 		
+	}
+	
+	public void replyDelete(BoardReply vo) {
+		boardReplyRepository.delete(vo);
 	}
 	
 

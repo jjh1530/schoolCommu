@@ -74,11 +74,16 @@ public class BoardController {
 	        // handle null boardIdx value here
 	    } else {
 	        boardService.replyWrite(vo);
-	        System.out.println(vo + "@@@@@@@@@@@@@@@@@");
 	        re.addAttribute("idx", vo.getBoardIdx());
 	    }
 	    return "redirect:/boardDetail";
 	}
 
-	
+	@PostMapping("/replyDelete")
+	@ResponseBody
+	public String replyDelete (BoardReply vo , RedirectAttributes re) {
+		boardService.replyDelete(vo);
+		re.addAttribute("idx", vo.getBoardIdx());
+		return "d";
+	}
 }

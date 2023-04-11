@@ -91,9 +91,8 @@
 								<!--로그인 한 경우  -->
 								<c:if test="${user != null }">
 									<form id="replyForm" name="replyForm" class="form-horizontal" method="post">
-									<input type="text" name="boardIdx" id="boardIdx" value="${vo.idx}">
-									<input type="text" name="writer" id="writer" value="${vo.userName}">
-									
+										<input type="hidden" name="boardIdx" id="boardIdx" value="${vo.idx}"> <input type="hidden" name="writer" id="writer" value="${vo.userName}">
+
 										<div class="form-group">
 											<div class="col-sm-10">
 												<textarea class="form-control" id="content" name="content" placeholder="댓글을 입력하세요" rows="5"></textarea>
@@ -113,16 +112,16 @@
 					<div class="card">
 						<div class="card-header">댓글 리스트</div>
 						<ul id="reply-box" class="list-group">
-						<c:forEach var="reply" items="${reply}">
-							<li id="reply-${reply.rno }" class="list-group-item d-flex justify-content-between">
-								<div>${reply.content }</div>
-								<div class="d-flex ">
-									<div class="font-italic">${reply.writer }&nbsp;</div>
-									<c:if test="${reply.writer eq principal.user.username}">
-										<button onClick="index.replyDelete(${board.idx}, ${reply.rno })" class="badge">삭제</button>
-									</c:if>
-								</div>
-							</li>
+							<c:forEach var="reply" items="${reply}">
+								<li id="reply-${reply.rno }" class="list-group-item d-flex justify-content-between">
+									<div>${reply.content }</div>
+									<div class="d-flex ">
+										<div class="font-italic">${reply.writer }&nbsp;</div>
+										<c:if test="${reply.writer eq user.name}">
+											<input type="button" value="삭제" class='btn btn-primary' onclick="replyDelete(${vo.idx}, ${reply.rno})" />
+										</c:if>
+									</div>
+								</li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -142,6 +141,25 @@
 	
 		document.replyForm.action = "/replyWrite";
 		document.replyForm.submit();
+	}
+	function replyDelete(idx, rno) {
+	    // 삭제 처리 코드 작성
+	    console.log(idx,rno)
+	    $.ajax({
+	        type: "POST",
+	        url: "/replyDelete",
+	        data: {
+	            "boardIdx": idx,
+	            "rno": rno
+	        },
+	        success: function(result) {
+	            alert("삭제되었습니다.");
+	            location.href=`/boardDetail?idx=${vo.idx}`;
+	        },
+	        error: function() {
+	            alert("error");
+	        }
+	    });
 	}
 </script>
 
